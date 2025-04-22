@@ -27,16 +27,13 @@
   <em>Designed for simplicity, customization, and developer productivity.</em>
 </p>
 <!-- TOOLS -->
-<img src="https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white&color=FF4B4B">
-<img src="https://img.shields.io/github/last-commit/eli64s/readme-ai-streamlit?style=default&logo=git&logoColor=white&color=FF4B4B" alt="last-commit">
-<img src="https://img.shields.io/github/languages/top/eli64s/readme-ai-streamlit?style=default&color=FF4B4B" alt="repo-top-language">
-<img src="https://img.shields.io/github/languages/count/eli64s/readme-ai-streamlit?style=default&color=FF4B4B" alt="repo-language-count">
-
-<!-- default option, no dependency badges. -->
-
-
-<!-- default option, no dependency badges. -->
-
+<img src="https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white">
+<img src="https://img.shields.io/badge/Kubernetes-3069DE?style=for-the-badge&logo=kubernetes&logoColor=white">
+<img src="https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=Helm&labelColor=0F1689">
+<img src="https://img.shields.io/badge/Grafana-F2F4F9?style=for-the-badge&logo=grafana&logoColor=orange&labelColor=F2F4F9">
+<img src="https://img.shields.io/badge/Prometheus-000000?style=for-the-badge&logo=prometheus&labelColor=000000">
+<img src="https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=Helm&labelColor=0F1689">
+<img src="https://img.shields.io/badge/Kibana-005571?style=for-the-badge&logo=Kibana&logoColor=white">
 </div>
 <br>
 
