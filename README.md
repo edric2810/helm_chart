@@ -10,10 +10,27 @@
 <em></em>
 
 <!-- BADGES -->
-<img src="https://img.shields.io/github/license/eli64s/readme-ai-streamlit?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
-<img src="https://img.shields.io/github/last-commit/eli64s/readme-ai-streamlit?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
-<img src="https://img.shields.io/github/languages/top/eli64s/readme-ai-streamlit?style=default&color=0080ff" alt="repo-top-language">
-<img src="https://img.shields.io/github/languages/count/eli64s/readme-ai-streamlit?style=default&color=0080ff" alt="repo-language-count">
+<img src="https://img.shields.io/github/license/eli64s/readme-ai-streamlit?style=default&logo=opensourceinitiative&logoColor=white&color=FF4B4B" alt="license">
+<img src="https://img.shields.io/github/last-commit/eli64s/readme-ai-streamlit?style=default&logo=git&logoColor=white&color=FF4B4B" alt="last-commit">
+<img src="https://img.shields.io/github/languages/top/eli64s/readme-ai-streamlit?style=default&color=FF4B4B" alt="repo-top-language">
+<img src="https://img.shields.io/github/languages/count/eli64s/readme-ai-streamlit?style=default&color=FF4B4B" alt="repo-language-count">
+
+<!-- default option, no dependency badges. -->
+
+
+<!-- default option, no dependency badges. -->
+
+</div>
+<!-- HEADER STYLE: CLASSIC -->
+<div align="center">
+<p align="center">
+  <em>Designed for simplicity, customization, and developer productivity.</em>
+</p>
+<!-- TOOLS -->
+<img src="https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white&color=FF4B4B">
+<img src="https://img.shields.io/github/last-commit/eli64s/readme-ai-streamlit?style=default&logo=git&logoColor=white&color=FF4B4B" alt="last-commit">
+<img src="https://img.shields.io/github/languages/top/eli64s/readme-ai-streamlit?style=default&color=FF4B4B" alt="repo-top-language">
+<img src="https://img.shields.io/github/languages/count/eli64s/readme-ai-streamlit?style=default&color=FF4B4B" alt="repo-language-count">
 
 <!-- default option, no dependency badges. -->
 
