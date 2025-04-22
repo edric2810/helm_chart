@@ -1,0 +1,50 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  IMAGE_NAME: <image_name>
+  SERVICE_NAME: <service_name>
+  ECR_REGISTRY: <ecr_registry>
+  TAG: <image_tag>
+  NAMESPACE: <namespace>s
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    - export $(xargs < $ENV)
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${ECR_REGISTRY}/${IMAGE_NAME}:staging.$CI_COMMIT_SHORT_SHA"
+  only:
+    - branch-exec
+  tags:
+    - runner-tag
+
+deploy:
+  stage: deploy
+  image:
+    name: public_images_env_deploy
+    entrypoint: [""]
+  before_script:
+    - export $(xargs < $ENV)
+  script:
+    - git clone <repo_values>
+    - cd $REPO
+    - git checkout $CHART_BRANCH
+    - chmod +x scripts/umee-core-uat-ci.sh&&./script/ci.sh
+    - kubectl apply -f configmap/$SERVICE_NAME.yaml 
+    - helm upgrade --install --recreate-pods -n $NAMESPACE $SERVICE_NAME $CHART_DIR -f service_name/$SERVICE_NAME.yaml --set image.tag=staging.$CI_COMMIT_SHORT_SHA
+  only:
+    - branch-exec
+  tags:
+    - runner-tag
+ 

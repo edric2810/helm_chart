@@ -1,0 +1,51 @@
+# This is a GitLab CI/CD configuration file for a release pipeline.
+# It defines a single stage called "release" that triggers an AWS CodePipeline execution.
+# The pipeline uses a specific Docker image and sets up AWS credentials before executing the script.
+# The script starts the pipeline execution using the AWS CLI.
+stages:
+  - release
+variables:
+  PROJECT_NAME: <project_name>
+  SERVICE_NAME: pipeline
+  IMAGE_NAME: <image_name>
+  ENV: <env>
+release-pipeline:
+  stage: release
+  image:
+    name: <base_image>
+    entrypoint: [""]
+  before_script:
+    - export $(xargs < $AWS_ENV)
+    - mkdir -p /root/.aws && echo -e "[default]\naws_access_key_id = $AWS_ACCESS_KEY_ID_PIPELINE \naws_secret_access_key = $AWS_SECRET_ACCESS_KEY_PIPELINE\n" > /root/.aws/credentials
+  script:
+    - aws codepipeline start-pipeline-execution --name $ENV-$SERVICE_NAME-$PROJECT_NAME --region $AWS_REGION
+  only:
+    - branch-exec
+  tags:
+    - runner-tag
+
+# This is a GitLab CI/CD configuration file for a automated deployment pipeline.
+# It defines a single stage called "deploy" that deploys a Docker image to an Amazon EKS cluster using Helm.
+# The pipeline uses a specific Docker image and sets up AWS credentials before executing the script.
+stages:
+  - pipeline
+
+variables:
+  IMAGE_NAME: <image_name>
+  SERVICE_NAME: <service_name>
+  ECR_REGISTRY: <ecr_registry>
+  TAG: <image_tag>
+  NAMESPACE: <namespace>
+  BASE_CHART_DIR: klb
+  WORKSPACE: ~/workspace
+
+prod:
+  stage: pipeline
+  only:
+    refs:
+      - branch-exec
+    variables:
+      - $CI_COMMIT_REF_PROTECTED == "true"
+  trigger:
+    include: ci/.yml
+ 
