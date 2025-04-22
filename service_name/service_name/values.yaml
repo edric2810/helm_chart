@@ -1,0 +1,162 @@
+replicaCount: 2
+
+nameOverride: "odcs"
+fullnameOverride: "odcs"
+namespace: default
+
+image:
+  repository: ""
+  pullPolicy: Always
+  tag: ""
+
+imagePullSecrets: []
+
+commands: []
+# commands:
+#   - "bash"
+#   - "-c"
+#   - "chmod +x ./wait && ./wait && /home/jboss-5.1.0.GA/bin/run.sh"
+
+args: []
+# args:
+#   - --stop
+#   - --runserver
+
+strategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxUnavailable: 0
+  #   maxSurge: 1
+
+podLabels: {}
+podAnnotations: {}
+  # sidecar.istio.io/proxyCPU: 50m
+  # sidecar.istio.io/proxyCPULimit: 100m
+  # sidecar.istio.io/proxyMemory: 100Mi
+  # sidecar.istio.io/proxyMemoryLimit: 200Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+topologySpreadConstraints: {}
+terminationGracePeriodSeconds: "30"
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+service:
+  type: ClusterIP # NodePort
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+      name: http
+    
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  cpu: 
+    # averagePercentage: 80
+    averageValue: 800m
+  # memory:
+  #   averagePercentage: 80
+  #   averageValue:
+
+
+startupProbe:
+  enabled: false
+  configs:
+    # httpGet:
+    #   path: /v3/api-docs
+    #   port: 8080
+    # initialDelaySeconds: 50
+    # failureThreshold: 3
+    # periodSeconds: 40
+
+readinessProbe:
+  enabled: false
+  configs:
+    # httpGet:
+    #   path: /auth/realms/master
+    #   port: 8080
+    # initialDelaySeconds: 120
+    # periodSeconds: 1
+    # timeoutSeconds: 5
+    # failureThreshold: 3
+    # successThreshold: 1
+
+livenessProbe:
+  enabled: false
+  configs:
+    # httpGet:
+    #   path: /auth/
+    #   port: 8080
+    # initialDelaySeconds: 120
+    # periodSeconds: 1
+    # timeoutSeconds: 5
+    # failureThreshold: 3
+    # successThreshold: 1
+
+lifeCycle:
+  preStop:
+    exec:
+      command: ["/bin/sh", "-c", "sleep 15"]
+
+#########################################################
+###  !! Setup env !!
+#########################################################
+
+env:
+  settings: []
+    # SOME_THING: sing and song
+
+configMap: {}
+
+secret: {}
+
+persistentVolumeClaim:
+  enabled: false
+  # default storage class if non-set
+  storageClassName: ""
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  # volumeMode: Filesystem
+  # mountPath: /abc/de
+  # readOnly: true
+
+extraVolumes: {}
+  # - configMap:
+  #     defaultMode: 420
+  #     name: umee-finance-backend-config
+  #   name: appsettings-volumes
+
+volumeMounts: {}
+  # - mountPath: /app/appsettings.k8s.json
+  #   name: appsettings-volumes
+  #   subPath: appsettings.k8s.json

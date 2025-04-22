@@ -1,0 +1,123 @@
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets:
+- name: regcred
+namespace: default
+
+commands: ["/bin/sh"]
+args: 
+  - -c
+  - . /vault/secrets/env && java -jar app.jar
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 1
+
+podAnnotations: 
+  sidecar.istio.io/proxyCPU: 50m
+  sidecar.istio.io/proxyCPULimit: 100m
+  sidecar.istio.io/proxyMemory: 100Mi
+  sidecar.istio.io/proxyMemoryLimit: 200Mi
+  traffic.sidecar.istio.io/excludeOutboundPorts: "443"
+  vault.hashicorp.com/agent-inject: "true"
+  vault.hashicorp.com/agent-inject-containers: odcs
+  vault.hashicorp.com/role: "odcs"
+  vault.hashicorp.com/agent-pre-populate-only: "true"
+  vault.hashicorp.com/agent-inject-secret-env: " aje-k8s/data/odcs"
+  vault.hashicorp.com/agent-inject-template-env: |
+    {{- with secret " aje-k8s/data/odcs" -}}
+      {{ range $k, $v := .Data.data }}
+        export {{ $k }}={{ $v }}
+      {{ end }}
+    {{- end }}
+
+tolerations:
+  - key: "app"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - device
+
+topologySpreadConstraints:
+  enabled: false
+  configs:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: odcs
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 1
+  successThreshold: 1
+  setting:
+    httpGet:
+      path: /actuator/health
+      port: 8080
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 180
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 50
+  successThreshold: 1
+  setting:
+    httpGet:
+      path: /actuator/health
+      port: 8080
+
+startupProbe:
+  enabled: false
+  initialDelaySeconds: 120
+  periodSeconds: 20
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 10
+  setting:
+    httpGet:
+      path: /actuator/health
+      port: http
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 1024Mi
+  requests:
+    cpu: 200m
+    memory: 600Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 4
+  maxReplicas: 6
+  #   cpu:
+  #     averagePercentage: 75
+  memory:
+    averagePercentage: 75
+
+lifeCycle:
+  enabled: false
+  preStop:
+    exec:
+      command: ["/bin/sh", "-c", "sleep 60"]
+
+terminationGracePeriodSeconds: 300
