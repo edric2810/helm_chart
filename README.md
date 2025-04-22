@@ -79,12 +79,12 @@
 ├── helm_chart/
 │   ├── service_name/
 │   │   ├── configmap/
-│	│   │   └── configmap.yaml
+│   │	│   └── configmap.yaml
 │   │   ├── script/
-│	│   │   └── ci.sh
-│	└── templates/
-│	    ├── tests/
-│	    │   └── test-connection.yaml
+│   │   │   └── ci.sh
+│   └── templates/
+│	├── tests/
+│	│   └── test-connection.yaml
 │       ├── _constrains.tpl
 │       ├── _helpers.tpl
 │       ├── deployment.yaml
