@@ -77,14 +77,14 @@
 
 ```sh
 ├── helm_chart/
-│   ├── service_name/
-│   │   ├── configmap/
-│   │	│   └── configmap.yaml
-│   │   ├── script/
-│   │   │   └── ci.sh
-│   └── templates/
-│	├── tests/
-│	│   └── test-connection.yaml
+│   └── service_name/
+│       ├── configmap/
+│    	│   └── configmap.yaml
+│       ├── script/
+│       │   └── ci.sh
+│       ├── templates/
+│	│   ├── tests/
+│	│       └── test-connection.yaml
 │       ├── _constrains.tpl
 │       ├── _helpers.tpl
 │       ├── deployment.yaml
