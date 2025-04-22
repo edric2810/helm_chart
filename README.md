@@ -82,21 +82,21 @@
 │    	│   └── configmap.yaml
 │       ├── script/
 │       │   └── ci.sh
-│       └── templates/
-│	    ├── tests/
-│	    │   └── test-connection.yaml
-│           ├── _constrains.tpl
-│           ├── _helpers.tpl
-│           ├── deployment.yaml
-│           ├── hpa.yaml
-│           ├── NOTES.txt
-│           ├── pvc.yaml
-│           ├── service.yaml
-│           ├── serviceaccount.yaml
-│           ├── .helmignore
-│           ├── Chart.yaml
-│           ├── values_prod.yaml
-│           └── values.yaml
+│       ├── templates/
+│	│   ├── tests/
+│	│   │   └── test-connection.yaml
+│       │   ├── _constrains.tpl
+│       │   ├── _helpers.tpl
+│       │   ├── deployment.yaml
+│       │   ├── hpa.yaml
+│       │   ├── NOTES.txt
+│       │   ├── pvc.yaml
+│       │   ├── service.yaml
+│       │   └── serviceaccount.yaml
+│       ├── .helmignore
+│       ├── Chart.yaml
+│       ├── values_prod.yaml
+│       └── values.yaml
 ├── Dockerfile
 └── README.md
 ```
