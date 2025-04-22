@@ -76,17 +76,29 @@
 ## Project Structure
 
 ```sh
-└── helm_chart/
-    ├── service_name/
-    │   ├── configmap/
-	│       └── configmap.yaml
-    │   ├── script/
-	│       └── ci.sh
-	│   ├── templates/
-	│       ├── tests
-	│           └── test-connection.yaml
-    ├── README.md
-    └── uv.lock
+├── helm_chart/
+│   ├── service_name/
+│   │   ├── configmap/
+│	│   │   └── configmap.yaml
+│   │   ├── script/
+│	│   │   └── ci.sh
+│	└── templates/
+│	    ├── tests/
+│	    │   └── test-connection.yaml
+│       ├── _constrains.tpl
+│       ├── _helpers.tpl
+│       ├── deployment.yaml
+│       ├── hpa.yaml
+│       ├── NOTES.txt
+│       ├── pvc.yaml
+│       ├── service.yaml
+│       ├── serviceaccount.yaml
+│       ├── .helmignore
+│       ├── Chart.yaml
+│       ├── values_prod.yaml
+│       └── values.yaml
+├── Dockerfile
+└── README.md
 ```
 
 ### Project Index
