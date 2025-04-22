@@ -34,6 +34,9 @@
 <img src="https://img.shields.io/badge/Prometheus-000000?style=for-the-badge&logo=prometheus&labelColor=000000">
 <img src="https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=Helm&labelColor=0F1689">
 <img src="https://img.shields.io/badge/Kibana-005571?style=for-the-badge&logo=Kibana&logoColor=white">
+
+[![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=flat&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 </div>
 <br>
 
@@ -73,25 +76,16 @@
 ## Project Structure
 
 ```sh
-└── readme-ai-streamlit/
-    ├── LICENSE
-    ├── Makefile
+└── helm_chart/
+    ├── service_name/
+    │   ├── configmap/
+	│       └── configmap.yaml
+    │   ├── script/
+	│       └── ci.sh
+	│   ├── templates/
+	│       ├── tests
+	│           └── test-connection.yaml
     ├── README.md
-    ├── assets
-    │   ├── line.svg
-    │   └── logo.svg
-    ├── pyproject.toml
-    ├── requirements-dev.txt
-    ├── requirements.txt
-    ├── scripts
-    │   └── clean.sh
-    ├── src
-    │   ├── __init__.py
-    │   └── app.py
-    ├── tests
-    │   ├── __init__.py
-    │   ├── conftest.py
-    │   └── src
     └── uv.lock
 ```
 
