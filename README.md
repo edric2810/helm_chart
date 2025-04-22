@@ -83,7 +83,7 @@
 │       ├── script/
 │       │   └── ci.sh
 │       ├── templates/
-│	│   ├── tests/
+│	│   └── tests/
 │	│       └── test-connection.yaml
 │       ├── _constrains.tpl
 │       ├── _helpers.tpl
